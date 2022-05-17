@@ -10,6 +10,9 @@
  import java.util.Scanner;
  import java.util.InputMismatchException;
  import java.io.File;
+ import java.io.FileWriter; 
+ import java.io.BufferedWriter;
+ import java.io.IOException;
 
  public class classAverage {
      
@@ -20,8 +23,6 @@
         String firstName;       // Initialize String
         String lastName = " ";        // Initialize String
         int[] grades = new int[5];    // Array with 5 slots for grades
-        int total = 0;
-        double average = 0.0;         // Inititialize average
         boolean endProgram = false;   // Set flag for loops
         int userSelection = 0;    
         boolean badInput;             
@@ -49,6 +50,9 @@
 
                 // Start conditional
                 if (userSelection == 1) {
+                    // Initialize Variables
+                    int total = 0;          // Initialize total
+                    double average = 0.0;   // Inititialize average
                     // Set flag
                     badInput = false;
                     // Ask for name
@@ -75,6 +79,9 @@
 
                     }   // End of for loop
 
+                    // Clear excess input
+                    stdin.nextLine();
+
                     // Only compute avergae if good input
                     if (!badInput) {
                         // Compute average
@@ -85,7 +92,8 @@
                         for (int i = 0; i < grades.length; i++)
                             System.out.printf ("\nGrade %d: %d", i+1, grades[i]);
                         System.out.printf ("\nAverage: %.2f", average);
-                    }
+                    }   // End of output
+                    writeFile(firstName, lastName, grades, average);
                 }   // End of option 1
 
                 else if (userSelection == 2) {
@@ -123,7 +131,40 @@
     }   // End of displayFile
 
     // Start writeFile
-    public static void writeFile() {
+    public static void writeFile(String f, String l, int[] g, double a) {
+        // Bring in variables
+        String firstName = f;
+        String lastName = l;
+        int[] grades = g;
+        double average = a; 
+        String stringToWrite = " ";            // Blank String
+        File dataFile = new File(FILE_PATH);   // Create file object
+
+        // Start building string to write to file
+        stringToWrite += firstName + " " + lastName + "\t";
+        
+        // Add grades to string
+        for (int i = 0; i < grades.length; i++) {
+            stringToWrite += grades[i] + "\t";
+        }   // End of adding grades to string
+
+        // Add average
+        stringToWrite += average;
+
+        // Try to open and write file
+        try {
+            // Create FileWriter object
+            FileWriter classFile = new FileWriter(dataFile, true);
+            BufferedWriter buffWriter = new BufferedWriter(classFile);
+            // Write to file
+            buffWriter.write(stringToWrite);
+            buffWriter.write("\n");
+            // Close File
+            buffWriter.close();
+        }   // End of Try
+        catch (IOException e) {
+            System.out.printf ("\nError writing file\n\n");
+        }   // End of catch
 
     }   // End of writeFile
 
