@@ -1,0 +1,6 @@
+Frank Bernal		99	98	97	96	95	97.0	Grade: A
+Shayla Rose		94	97	100	98	93	96.4	Grade: A
+Joe Schmo		80	81	82	83	84	82.0	Grade: B
+Boba Fett		79	78	77	76	75	77.0	Grade: C
+Forrest Gump		69	61	68	62	67	65.4	Grade: D
+Peter Fails		0	55	60	34	47	39.2	Grade: F

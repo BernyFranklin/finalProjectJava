@@ -146,8 +146,8 @@
     // Start displayFile
     public static void displayFile() {
         // Print header
-        System.out.printf ("\n\n Name\t\t\tGrades\t\t\t\tAverage");
-        System.out.printf ("\n-----------------------------------------------------------------\n");
+        System.out.printf ("\n\nName\t\t\tGrades\t\t\t\t\tAverage");
+        System.out.printf ("\n--------------------------------------------------------------------------------\n");
         // Try to open file, read data, and print
         try {
             // Create file object
