@@ -3,7 +3,7 @@
  * Frank Bernal
  * CIS 084 Java Programming
  * Input: firstName, lastName, grades[]
- * Output: average, displayFile()
+ * Output: average, grade, displayFile()
  * 17 May 2022
  */
 
@@ -15,8 +15,9 @@
  import java.io.IOException;
  import java.io.FileNotFoundException;
 
+ // Start classAverage
  public class classAverage {
-     
+    // Constant for file path
     public static final String FILE_PATH = "class.txt";
     // Start Main
      public static void main(String[] args) {
@@ -50,6 +51,7 @@
             try {
                 // Get input
                 System.out.printf ("\n\nEnter Selection: ");
+                // Input read bby scanner
                 userSelection = stdin.nextInt();
 
                 // Start conditional
@@ -66,8 +68,11 @@
                     System.out.printf ("\n------------------------------");
                     // Ask for name
                     System.out.printf ("\nEnter student First and Last name: ");
+                    // Input read one string at a time
                     firstName = stdin.next();
                     lastName = stdin.next();
+                    // Clear buffer to only accept two names
+                    stdin.nextLine();
 
                     // Ask for grades
                     System.out.printf ("\nEnter last 5 grades [0-100]: ");
@@ -91,20 +96,22 @@
                     // Clear excess input
                     stdin.nextLine();
 
-                    // Only compute avergae if good input
+                    // Only compute average if good input
                     if (!badInput) {
-                        // Compute average
+                        // Compute average, converts total to double for accurate math
                         average = (double)total / grades.length;
                         // Get grade
                         letterGrade = getGrade(average);
                         
-                        // Test print
+                        // Print data entered
                         System.out.printf ("\n%s %s", firstName, lastName);
                         for (int i = 0; i < grades.length; i++)
                             System.out.printf ("\nScore %d: %d", i+1, grades[i]);
                         System.out.printf ("\nAverage: %.2f", average);
                         System.out.printf ("\nGrade: %c", letterGrade);
                     }   // End of output
+
+                    // Send data to file
                     writeFile(firstName, lastName, grades, average, letterGrade);
                 }   // End of option 1
 
@@ -112,6 +119,7 @@
                     System.out.printf ("\n\n------------------------------");
                     System.out.printf ("\n      Display All Grades      ");
                     System.out.printf ("\n------------------------------");
+                    // Call displayFile function
                     displayFile();
                 }   // End of option 2
 
@@ -120,6 +128,7 @@
                     System.out.printf ("\n         End Program          ");
                     System.out.printf ("\n------------------------------");
                     System.out.printf ("\nThank you for using Grade Inputter 1.0\n\n");
+                    // Set flag to end program
                     endProgram = true;
                 }   // End of option 3
 
@@ -187,13 +196,14 @@
             stringToWrite += grades[i] + "\t";
         }   // End of adding grades to string
 
-        // Add average and grade
+        // Add average and grade to string
         stringToWrite += average + "\tGrade: " + grade;
 
         // Try to open and write file
         try {
-            // Create FileWriter object
+            // Create FileWriter object from File object
             FileWriter classFile = new FileWriter(dataFile, true);
+            // Create BufferedWriter object from FileWriter object
             BufferedWriter buffWriter = new BufferedWriter(classFile);
             // Write to file
             buffWriter.write(stringToWrite);
@@ -212,7 +222,7 @@
         // Initialize local variables
         double avg = a;
         char grade = '0';
-
+        // Conditional to set letter grade
         if (avg >= 90.0)
             grade = 'A';
         else if (avg < 90.0 && avg >= 80.0)
@@ -224,7 +234,9 @@
         else 
             grade = 'F';
 
+        // Return char
         return grade;
-    }
+    }   // End of getGrade
+    
  }   // End of classAverage
  
