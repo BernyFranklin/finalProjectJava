@@ -1,0 +1,22 @@
+Welcome user and present 3 options
+
+while userSelection != 3
+    [1] Enter Data
+        Prompt to enter studentName
+        read firstName
+        read lastName
+        Prompt to enter 5 grades   // Use array
+        read grade1 into array[0]
+        read grade2 into array[1]
+        etc...
+
+        compute and store average
+
+        open file
+        append data to file
+        
+        Data should read 
+            Name    grade1  grade2  grade3  grade4  grade5  average
+    [2] Display Text File
+        diplayFile()   // Create function that opens file and presents data as a string
+    [3] Exit program
